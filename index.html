@@ -580,7 +580,7 @@ float bounceOut(float t){ const float n=7.5625, d=2.75;
     pmx += (tpx - pmx) * 0.05; pmy += (tpy - pmy) * 0.05;
     const mob = innerWidth < 760;
     outer.rotation.y = (mob ? -0.22 : -0.38) * (1 - a) + 0.12 * U.uMorph.value * (1 - c) + pmx * 0.12 + (reduceForge ? 0 : Math.sin(t * 0.25) * 0.03);
-    outer.rotation.x = 0.16 * (1 - a) - 0.14 * c - pmy * 0.08;
+    outer.rotation.x = 0.16 * (1 - a) + 0.06 * c - pmy * 0.08;
 
     // pointer imprint (ring buffer that cools down)
     if (ptr && t - lastPush > 0.035) {
