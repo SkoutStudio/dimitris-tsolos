@@ -498,13 +498,13 @@ varying float vGray; varying float vGlow;
     const j0 = Math.floor(-ex[2] * V.h / rowH), j1 = Math.ceil(ex[3] * V.h / rowH), cols = k1 - k0, rows = j1 - j0;
     // portrait square: right half on desktop, top on mobile
     const S = mobile ? Math.min(V.w * 1.08, V.h * 0.62) : V.h * 0.98;
-    pivot.set(mobile ? 0 : V.w * 0.2, mobile ? V.h / 2 - S / 2 - V.h * 0.07 : -V.h / 2 + S / 2 - V.h * 0.03);
+    pivot.set(mobile ? 0 : V.w * 0.2, mobile ? V.h / 2 - S / 2 - V.h * 0.03 : -V.h / 2 + S / 2 - V.h * 0.03);
     U.uHalf.value.set(V.w / 2, V.h / 2); U.uMaxH.value = V.w * (mobile ? 0.07 : 0.055); U.uR.value = cell * (mobile ? 9 : 7);
     // one scale (world units per metre) for bar and rack: rack 2.3 m tall between floor and nav, bar 2.2 m
     const floorY = -V.h * (mobile ? 0.04 : 0.44), topY = V.h * (mobile ? 0.41 : 0.42);
     const u = Math.min((topY - floorY) / 2.35, V.w * 0.9 / 2.2);
     U.uKitU.value = u; U.uKitO.value.set(pivot.x, floorY);
-    B.kitX = pivot.x; B.holdX = pivot.x + (mobile ? 0 : 0.12 * S); B.holdY = pivot.y - (mobile ? 0.05 : 0.15) * S;
+    B.kitX = pivot.x; B.holdX = pivot.x + (mobile ? 0 : 0.12 * S); B.holdY = pivot.y - (mobile ? 0.02 : 0.15) * S;
     B.floorY = floorY + 0.225 * u; B.rackY = floorY + 1.48 * u;
     const n = cols * rows, aXY = new Float32Array(n * 2), aA = new Float32Array(n * 4);
     if (mesh) { inner.remove(mesh); mesh.dispose(); geo.dispose(); }
