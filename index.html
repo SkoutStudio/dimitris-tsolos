@@ -49,7 +49,7 @@ nav ul a:hover{opacity:1;color:var(--amber)}
 @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* hero: steel pinscreen portrait */
-.forge{height:440vh;position:relative;padding:0}
+.forge{height:420vh;position:relative;padding:0}
 .forge-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--bg)}
 #forge{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
 .forge-pin::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
@@ -63,10 +63,10 @@ nav ul a:hover{opacity:1;color:var(--amber)}
 .hero-row{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
 .f-a p{max-width:440px;color:#cfcbc3;font-size:17px}
 .f-btns{display:flex;gap:12px;flex-wrap:wrap}
-.f-quote{font-family:"Fira Sans Extra Condensed",sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(26px,3.4vw,46px);line-height:1;text-align:center}
+.f-quote{font-family:"Fira Sans Extra Condensed",sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(40px,5.4vw,88px);line-height:.95}
 .f-quote em{font-style:normal;color:var(--red)}
-.f-b,.f-c{opacity:0;text-align:center}
-.f-c{display:flex;flex-direction:column;align-items:center;gap:24px}
+.f-b,.f-c{opacity:0;right:auto;max-width:min(560px,42vw)}
+.f-c{display:flex;flex-direction:column;align-items:flex-start;gap:28px}
 .f-steps{position:absolute;right:clamp(16px,4vw,48px);top:50%;transform:translateY(-50%);list-style:none;counter-reset:f;display:flex;flex-direction:column;gap:14px;
   font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
 .f-steps li{counter-increment:f;display:flex;align-items:center;gap:10px;justify-content:flex-end;transition:color .3s}
@@ -82,6 +82,9 @@ nav ul a:hover{opacity:1;color:var(--amber)}
   .f-a .mega{font-size:clamp(48px,15vw,84px);margin:12px 0 14px}
   .f-a p{font-size:15px}
   .hero-row{gap:16px}
+  .f-b,.f-c{right:clamp(16px,4vw,48px);max-width:none;text-align:center;bottom:7vh}
+  .f-c{align-items:center;gap:22px}
+  .f-quote{font-size:clamp(30px,9vw,44px)}
   .f-steps,.forge-ui .scroll-hint{display:none}
   .forge-fallback{right:50%;transform:translateX(50%);max-width:none;height:62%;bottom:auto;top:8vh}
   .forge-pin::after{background:radial-gradient(130% 70% at 50% 30%,transparent 50%,rgba(10,10,11,.85)),linear-gradient(to top,rgba(10,10,11,.96) 18%,transparent 55%)}
@@ -245,12 +248,12 @@ footer{padding:30px clamp(16px,4vw,48px);border-top:1px solid var(--line);displa
             </div>
           </div>
         </div>
-        <p class="f-stage f-b f-quote">Δεν γεννιέσαι δυνατός.<br><em>Σφυρηλατείσαι.</em></p>
+        <p class="f-stage f-b f-quote">Άφησε κάτω<br><em>τη μπάρα.</em></p>
         <div class="f-stage f-c">
-          <p class="f-quote">Άφησε κάτω τη μπάρα.<br><em>Η σειρά σου.</em></p>
+          <p class="f-quote">Built, not born.<br><em>Η σειρά σου.</em></p>
           <a href="#contact" class="btn btn-red">Ξεκίνα σήμερα →</a>
         </div>
-        <ol class="f-steps"><li>Ο coach</li><li>Η φιλοσοφία</li><li>Η σειρά σου</li></ol>
+        <ol class="f-steps"><li>Ο coach</li><li>Το drop</li><li>Η σειρά σου</li></ol>
         <div class="scroll-hint"><span></span>Scroll · Πάτα το ατσάλι</div>
       </div>
     </div>
@@ -362,8 +365,9 @@ import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 // ---------- Hero: steel pinscreen portrait ----------
-// Thousands of hex steel pins. Scroll: the coach is forged in relief -> the pins re-form into
-// "BUILT NOT BORN." -> they build a squat rack with a loaded bar, which drops to the floor. Pointer presses leave a red-hot imprint.
+// Thousands of hex steel pins. Scroll: the coach, forged in relief, holds a loaded bar -> he lets it drop
+// to the floor (deadlift drop + shockwave) and sinks into the steel -> the pins build a squat rack and the
+// bar is racked, waiting for you. Pointer presses leave a red-hot imprint.
 const COACH_MAP = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAAnzElEQVR42u29a5Bl13Xf91t77/O4j+7bj+me9wADzAwexBskIZKgKZqyREWlKGXHSqLog0sVVSWpxC7bSSVxnKSc5IvyJZWqVCpOmMi2ynTZ5Viy5CiUJVuKLFokxSdAAgSBwWMwmOl59Ou+zj3n7L1XPpxzexqUpZB2NzgzmIuuqS5U1+3be531+q//f2249/qBvuQH9Etl/qubfxWAOP/m3usQj978sT9gf0DPxN3vAWKMjdED1nW7g4e6i/cl2bJzHdBQTybDN3dvfDX4MYBYNNwzwIG9rLEKMYb1IxceeOjfuPDoT50+8/hifyFzdFNyh4Wy5vW3X/vnX/jsH3zpfx+NLr87NN0zwL/C+1vrYowi9uGn/sNnP/aXTh8/3e+SJCDRSLQGI6SGjjWZMdOC19+59v987r//yh/8z/OPp3/sJ9d7Bvjj390oMUkHf+LH/pcPfvhnBn2w3iZinIgRFUQAjJIKuUSn0cRkd8zv/N7f+ZV/8HMhlH/0Kcvd4R/2sK3rkv6P/OQvPfHMn13se5epzaxJhUTUEi1eUAsWDBgxxqhGK+HUiSfT/PS3X/7VP/qg75JcfdgG0B/6xC88+eE/N+jXSW5NakyKSTEJJgGHcURDqdRgLBHESB0lRn//6WcuX37l+vUXRexdnAwOzwAG9Mz9n/7kT/xPi33NuybJxWa4DJtiGxvMDVArlRIUY5gFgoqPxCiDwbmvffWXYqzv4trUHNo7K5innvvL3Y61ieJEEpqv5vSjRR04gmm/KcAbOh1cSpobk+iJM089/MhPgYqYewb4vh///sKpo6c+6BLEGRxqUUslVEIwBIM3eIO4NiIlKdGSpHQ7dDv0O7GT88wH/xyIarxngO8n9osAC4Ozvf7AJYqVaIiGWvBCqdRCMEwDFYjDOLKMTk6aUQtqqcEbk6T66COfOHb86caf7koDuEN867TnnKhEMeIhKhrRiBqKmjKiQteSOrops4phwc2CoiCJrFqcl7IIzmT33f/xjatfFRHVewb4fl4xlMZgLBgiiBAFrwjUkQCJxVqyhI0hL2ywM2E0pZzRgZM5S4bRLte3SVc+COh3H/9d0gccol97P1MwIgpIU2KC4CMIqSOxKLy6xbc3sYY8QQwqTDzDGhXe2GWlh5ZX7tYm4LA8oHlavZ/6WEcSiCAKAtYQhNQilgibBdszxGCUqWdrRl1zPOf8Kk+tsLXDxWt0i80mr+zzAb1rbHCIHlDNdqezQpUqUAaiImCa0xd8ZFJTeBDKwPUpN6b0Us6t8uFTPLBCrfzoBXNqiZ2ti3cxGHdIOUCBcrZdFrsbo8WvbWnSlTPrrC6SdbBJW9SI0E1YSDm1wKxmvIqJ5MKSZZCiJVh+8mH+1398N08IDtMDyt3J6NrmhCMdzi0zrbg2xgdiJERCRCB39FIi+IiCgip1ZHvGuGZcRWN45oP/9r8oCd8zwP9fGwxxPLzSTzi1oJMKIg8ssZLjDFYwgkAV2JmxOWWroAo06Xrq8ZHEkieyMYGFx6zLm0RyLwR9H72YKjubF8+nenWib8748AOsdxkpAk7AEIUyUHpKTx1JLJklBIqKxPLFy9RTpmMWp+EPQRFyzwO+p9e1tz/vRNa65sMnWEzZnVH79tkXsIIzOEPuWMrpp4gw8wAXt7i4zRvbJJaVdBJCtf8z303Q0GH9JaoR5NLrn7tx9VurHXusGzPDrMIKFlRRJWob+p0ltQRlWiPgLOt9nj/DQ2tyYpFjR47n+XLztonr9XsnEteXuwWZOEQ0VMT4evL53/yvJzOtvWik50gEA06wgu7LxkCIVIHMESJ1YFpjhI4jzwd5PmjetNs7ubR43iUD7hYnOEQoonGC17/9y6++9BuPPPPp61P/4o597gHWl1AlRiL40PwkxmCFzLJdcH2X0ZibO9RT8sgj/TRJu4AxLksXclMEX9w1+OihPkcNjq8vfeUXNYKaccnWFB+oPHXAB3wEbe2RGOrAxS0u7zIuGWScXebkArMKEQek6UC03th+o6p3INzzgO8Vk9i69s3pdHT6yEKvFwsjk4pKUEsFs0DqMIIxqDIs6SWcPUYWGY+ZjLCOE3n4WgxAr3fC++G02FKt75Wh30dLPB1tTIfXl1cWVnItrQwrRkoFpVIrnZTEgEJkVpMaUkNVcWXI7i6JZ6k7C75Is6XM2ZvDm/EuOv33wAAA5WxnZ+utE/c9SNQ8o4zslEw8WxXOUiuJIUaIhIgDUbqOc8vYHl2FnUkI9eLCGYOv6vG9RuxfpiUe7VxWxYAqHUfuGQcSwywQK6xBlBiwkVMLHEkpC1yNrzQELYeXq2rSzRaGk615F6b3DPB9OkGxExWjGBDop4wCUpMYqoB6fMB7bCSJbEJZUE6JhZpaije+NSu2huqLcrwX1u4Z4PvDJKpyHJSG39Mg0ssdishu1dqg9FQ1vmJnRK5IjamirV0+23z9G59R9cVsGNXfA+P+JV8x1qot3mkMRsgdyx06SctYV6UORCUqk5JZpTHaXMqdL//FrY0vipi78vTfCwM0lWjaWVKBORnUWRJLYskc1gDYpjdWNGINItIxZXjhr7z24t8WMXcrFv3eeIACnYWjDQLXOIHIHq5Gx9FNyBxOcIIRjMbUyJHqG9/5+mfnJrxrDXDYOUAA6/KF1bNioWFEG4yBiBGMkCdkDhT1TCOqEMkMiRYhBjTe3ZqZwzWAiFX1g9UL6ycfSRxixVqsJRhEMQZnWnS6MHRTQo0qVumC2EzuXkLce2MAMTbpLtz32J/4TzRbvF7EuhZmJBlphnM4iwiJxUeswRqcRSOJIxM6/ZU0SYt7BvhXyC5x9cRHnvvxX1i57+lp0AqZBaqaUFGP6OccXWzzcKxbb0gsPpAakUh3+dTCYG139xoCeo+e/v2fviTLz/74X7//wkfUqaTSkHDFIZYozCLjGoTMtWioEUJElb4TQsiTbHbj5Y23vmhsMq9g7xnge028Ktmx88//j088+5M2DZIaSYiWaLAJxqKCtYhh5tspWCdhMaXj6CWsdzFQBXng/sfe+c4/G+9ebksnsfcM8D2dvslOPPmpz3zouT+d58FkloRoCRYc1pGmpAmZI3UYQxVaPkTXsd7lSJfVDoNcaq9n1pYe++DPpP0HqsnmaPftxglE7N0EB9lDCD565qGf/tDH/0LexWRWHdERGiGYBYOxWNs2ZU1HBlSBmafw1J4QOdJlORfQk0vZmfufeejZnzty9Flfjifj694Xc4zvnkjvj3hdePLnTz/4nEujSU1MKIUZREOW0s1Y6Mjagqz3ZdCRzElUEKxpiYshMqkYlvRSuqlY0a4LuTOd5YdOP/rvfOCxP3PkyMObW1dm06v79h3cM8D++GPzJz/+V9eOniDR3SATJcs5ssjJZU4ty9qCLHXopuQJvZTlDkd6stqVbiJRKT0i5A5gWFJH8kS6qYmoSJjUlObI2okPPf7kz1a1XHvn9+4Z4F8Qf5bWnvzIp/5K7czLO7hMHlzn1AorfdJUguAhCrHtkVt66FLOapf1vjgjm1PqQO7oJkSY1lQRZySxJnMSNW4XYRo6F85/qpMuXnr9c3d6Zj7IT9+M4C889fPHz//IF66G46vmh86y2EMt0YgHDMa0KoFGEND0X1Za5vpKh8TKjYkEbdODQhmY1AQldSROUmeGZdycxpOnPzbeen3rxtfv6HxgDzT+RGPSD/2pX3h5duL4sn78nCQZkpBlWCdqcK49fYWopA5nCJEIRohKUHopXtmdSUSaVtkajGHmGVWUAWsY5FIFGZZcOPuRiy/9clVu3bk2ODgDiAVdO/GR1af+i8rID18QGlGqo5uLSxCDsS39VgSvoBhDiNSRoARtKVl5wm7JqEKEPGnlTYlrYGpEsMJCJkUV1A76Wf+tV3/1zi1MDxiOPnXhp7Yr+8FTIUlwjihUilecJUtwBoSoAKpManZnTGtKz6RmWlMGAhjh2AJiGNZUShS8UEO0iAOHN0TH8RVj0/jQkz89WP0AxDtURnlwH1qDiO0d/2QnY22hhZ1VqCLjWiOkjtQB+PnzXkcK3341KpoyUAXKSJawkDP1FAE1qEEtQQiGaFDX6Lxlua/dhYX7zv/EPAa+fw1ggMHKhbDwgeUeaSqYWyl3FtiZaelVUWeISlFTeqrAtGZStQZQbQ3TDCYXMzWmxYtUUCEagiFasDS7PqLFJtx/4Ucb9OlOtMFBGUCAI8ee3qzzxAZjREwrixShjoxrtmeMK2Zep7VOaqaeccW0ovCMyjbBlr5Vk8X52HJcUysqBAFDgBqCaSoropGSePLB59dOf+oO3WhwkJ94ce3piSdPYlPqIBhD4toBZBkYV+1B+0gV8KHVJKlSecYVhW8Lfx+1yb3jmqmnjFSRKlJDpZRKESkhWhEbBwvZcz/y32EyvQPHZwc1D4hAuvp0FckTaebv2jRctMaoIyFQKz4SooaIEWkKmyYnR6UOKMSo0JanZWBnRulIDA40EAJLjvU+acQFpLLMwjMfeO4LZ3/65sVfErF6R+2bMwcUfzRJB777SD9jtS9No6vgY2uDqFSBOrYUoKgYQVXrQOWpPD7iI2WgqLVNxYE6Mq25WbA9Y1gyqvHwwAqnlxDTBiXnSBI9vqQ//In/AMwdR1t3B2WA7uL9Y3P0/mVd6kgQrJ1nTsUIZSREamXm8UqIbecVmxBEq1UqvfrYdsUNPjquCJGZp+tYSHjsBEbZKVlJWXbkivVUU0upH3/6w//vsWdubHx5npDfXwYg65/upPbxo8EYE8AadG6DpvKplRBbbygDITYNgRoRIBqmUWe+1VA6ZVqzU7SSsQanqzyjComcXyKFJCK+WfDEtAxdl5y78OkbG18WuZP84AANcN99SxxfUK/zVXyCWLAEISrWIIGgbcXZBihFUSsSlNK3krEGkxiWrXa1aR0Sw6zmzR1WcqYBZ/FwY0wssTU+iA+cOfvx3/9d7qwccGBDeZcM1nokRivFByTiwArGYgSN5I6gbcnvG3WYEhVVgqiGNg83z3sMjEqmdWsnH4kGZ9gp6ThuThkLr99APOf6Da4nFtbXzyXJQl2P7iBk4sDKUBFNLQJ1oPC3+qkYUcUaUksvpZfSTcgapFNbM4T5WVnT8h+MMK1bX4lzdyk9WwU+cnnIsOTGlGHJLJAlOCcIkvbzztL7swwlVLsoXqVWishCU0cGpGF8CsZihW6C0PZcLSYR2x+oI92khT9XOySGOpIYWlq1ECKlR+HqmFTopkwmbM4YT3C15oGynhnuMA7vgXiAApOdb4/LOPMGZVrj4/wB3xdtBBJDNyUxZI6OmwtU507QZGln6KU8uk5q52vV534wC/hI4bk+YWPMxHN9Qh1xlsRh/GYxG95ZvdiBGCACw81vvn31rStDSSSGwLhso0dzcI0ZmsPNLL2U1LLa5WifftrK5LsJQdsNHqXnkTU+doY6tOG8SQ9VIMwtIcL9y5wccGqJxOrGhOs7N0OojXHvtxCkQFXc3Lz8u68uny2NJF2qQIhoRGK7tL7xABEiba0ZYJDRcQCFb+G53JHNeRLPnuCb19gssIKClbaBGJYcW+b8EkXBpOa6J5QUnq2dKyCI4c4JRAcIxsWN137lyrW3vnE1XtphWrWCC9U2ItRztLnyFDVGcAaFbkJqSQyJZa3Heq/N1VHppzx2FFVE2jdpyvvE4gzXJlwZc2aJY4tAWMxrX26CoHfSPq2DnAnbpC+uP3Hrm7o0U44OSFyzFBoVgmKFOC/zG256VOoIMPNYw2LW7pJLbfsDAq9tzbsKQZUzAyYV18d0HF3LsS4rmeZGLl66cvEbvzy8+e0YPRrfb2WoiFiNIQYf1Y5m8fUtNiftOo4m+uscDirnfUAZUNqpgDUMMtL53LFJBqospPTTFs8QiMqkxgj9jJnnZsE/epUvvoNY1+svliGKcarhDhpPHlS+UpAQ6ipaIznKuOTyLkeXiPPVHMYQlKKmjrhmXCMYoZdg59ToxIiINoGrcRqgn7JZtP1B1FuLtUplMcVGXtkS8fEDp5ZvfuTni5sv3XznC3dQI3ZgIcjYjvQf7Z36dFg4521aIVhOL7VU3PYLEJJ5eGm+SR2Za76Xhh+3p2GqAnXg6ogbE8wctV7OAc4MWO2QWx5ZJbPEKDHEweB0UcqV7/zD9yEcjVl4wicnoxmIZDGKE25O2Bi1kaTpoapwqzB1htSSuzbcgwRts3QzoqljC1wntg1lVWgJRZO6jVRTz6hmvc/5NcRKluoDT/xUtnDfwTb5d0YjpslxjWG28wqhFhWUouKl621DsNcHAE4kd9JJpClmBKJKHWi+mqasChQ1ZXj374A6sJTTSXCG+5dZzAnQyXCOowPJ0nD2xOrZj/630CCC8n4KQZ1zmiyLscnK4zHtRdFoZOxZ7rHSJYAYrCFx4uxcGiatcnXPLZpm2Idbj7yPXBlxedSyd6PSSXh8nTe2ObHItGZS4oRJSWYpa2OIj557+tXrMrny24d8PcVtZAAD6rKjYflHJB1k4R1Z/kA0Yiyl4uHkUstuc7bhIkpQ6kCIIG131uTVptBs2VcGYLfk6hhnWgQ7s+zOePgIw5I6kBquTYjKdsG45KUbbBfcvxgff/STr10djq/989vfBgfnAXEUV/903lsZjH49OfqxCT2sGisjz3KPtT5RMAJCUNmDP5tk2yBF1jSSMUkMqSN3dBIuD7m4TYjtqKDJKGXg4VUuDxlkTCtWO3QcNya8sMG5FTnSRTV+6Kkff2NjPNz4/G2eDA7KABJDsSjXBuvPnj5+MumfHJulSlWceKVWTi9jDF4JTXhuGJ/7Hvym1zXSlqTpXEe/MebFaxT+1ukbYTjj7DI3p1QBZzjaY6VDLyGzlIHFTHLLYhYf+8Cnd2bda2/+JnPi8N3dCZtyemkhpXffv7k0GHibj4MJiHVMPP2cQQevc66KlaazbYCDJgo1Bmhyw14CXcoZV1yf4AzGtAYrPCtdgrblaeooPOtdVrtc2uFoj34mdaSfxg8/8XGTn33jlc/FWN+elwEdsEBjOny9zs7XS8/1c2qxJdJwqgrPscVbSFxipQWZ/3A718YlqQNVILE8dIQqcGkXa25honnC0R5vbNNNscLVEQiLWdsf1BEQa0TwD5595szpZ1984f8OvviebSBNb/8eML0O2ACqvt7+ctX/UP/IBWs1GFMpCNNA5ljp4mkSsnzX6cucWdgsj4uKiDQnboQzS+wUXB0hcySuDpxf5Z0hizkrnRa1Xu6QOkrfhjJrMMYYwvqxh048+K9dvvTCZHjpj04Jdv5B9oLVXBt7mBqQA35rERv8JI83quM/M+iaYEQMHoIw9az1yRICRBWdK2RagcZ8i0pq2zRgDW7O3EotD6zQSZhUTOu2TTu7RGJ5Z8jOjO0ZRljI2CqoI/2MxLZEvFqNM+H0seOPPfvvbg2n197+fWjWMOr8uM0+pLX1w7yzdmT96ZXVx2ez3eaK0cYhmq8DhDoOo1UxwP1/6u/1L/yZqfg6sWNlpETLhXUePYbYRutC6iRz7Yk3CaAdk83ZRG07Nf9TrTCueGObl25wcYv1Hk8c5YUNcsuopGN5bI1UuLBMzxI8EvA1dUWsyYl9a6uSX/+Nv/FPfvk/CvXkuz704PgPP//8n8/yhbIslwfHVpZOHl86tpDw5pU3/9Fv/Q+vvPQZjYeyLPDgDdCQA4+cev70v/7bE2snoCkTmCpZxlMnWe23OuHE0UnIXJuQmwmBFaCtkVybkzGiDXfamXZW/M6QF69xapEvXmZcYqCXcGqBk30eWyMGihKnJJCCeKLHqZoQa++++PUv/+rf/6uTq7+PRvKjbvWjjzz1Mz/x0R+9cMQMZ217kVtM1LKKDjsp+Mo3f/crX/3fLH7QPbq2cOzlN3/v1Uu/fiB+IIdjVM27R5/52W8Ms6MjYu0kJhTKDI4t8fA6acJCzmLeKgbmFea8JW7kYIbEkFptCqTEtp1ws9mjm7SQ0Vs7fPUqb+9wapG1Lt6zmHJzzLEeZ/okQqJ0DAmYiFNiHUTdtRFf+c6lqtZOb+3sSvfCKrnTySwAVc2sFoPUtRQlS4m6qGVpFy0rdpRKtyv2F3/z//h7v/XvHQgF77DGp2WxGYZvJGtHc9Gg0vCCorI1ZWvKap+iJnVUgYCo4oxYo0bEx5Yz2gQiKySWjiNzt4ZoDUTReMMDK5wZ8MomW1NQXt2lY0lF60iailE0EkSanfkKYqyGcO6oPLh2pqxBcfgQ2JqZjal1wiDFJGpUZ2UoQ3hrahadG7gwrvxounXj5tdee/Pzv/OVX9wHUN12BlAwqr7afild/6GZqmkaXcgtRWRjRJ4SaIWP1qg1IoJRqSN10GrOX2/kYKltT78ZHvTSW/hoQxZKLRdWicu8cI060k/i0a5/eM2EaK5P6FrNiEsZVhSRxFmNZqOgrEIi5FYyY3c9l8fcmLCa69nlkImayLFOiLWXaHKRWJtvXY7Xtu2XvvR/fuOlv/luhPB29AABip3XepALhSIRjThDZhiWbE5ZMw0sQerENfizAPjIpGJUUdStAZpdBo0lOgkrHZZzEtvmCYTCtxP/s8sc67HWk1yMRa/u1m9uhb7TZ4/GU32NAWtc6kwdiJA6EwJVYKdgY8S1CT6Q1HpzPOsY7bg0UULARFN5LWaM66QI+Y3Nl0BEzEERIA/xEp+dq186EkIns6NaZ0GMwwqpAWFrSj9rS/6g6kxbbhppJ186f8CBxLTEusY8TSboJS2h2s53bjXpejFHRIx1VjRKHAd7reDUMllF5cWKSURSadWDN6fcGDMs2C2IgbUOinllKymKKvjgq1gXBUGcWRLvJ7s3r3znr1+7+QLtYvjbtQraS6o2WXj0J359uPJ8kofCmpggKc3emlJZ6nJmGWvnQJBg24mYKsw8w5KibuvRBp7LbAsT9VN6aYtpq5JaUtsipjEi4AxdRz+h9lwZYpSeIwZ6jtxQ1XjPaMbGLld2KSqMspRyosdyigZ5e0tv7IayKH1FNdndefs3dt/53HTrD6bjN273Rmx/N6CxdG7Br/3Y0EsQUUMUxLTSgYknsfSzNhA184CorR80Z9owTRtXaG8a4NaOgwa7rmOLXvgwn/5D6ZmU7SaiEwus5nQTBildB8pwxs6UrSnXRwxnBE9uWMnoGFJQH/ExETedpTd3xle+9tfeefG/me5+s652DuN5PTwSmQLX3/5nR85frjtnAtEiSSMaCBiLEzZGdFOWOi1DtOGtNJ2cKFbopxhhMpeVjUqcIXPMHGVoGb6Nnaxp7kRv2Y+JMK24vMt4xiCjZ+laeg6rGKWsmMzYHrMzoSgxkZlny+tUoo0Sgi1LxsPtK9/+7PVXPjPZ/vq+0WG8gwwA4Cdvjm68rKdOe6+hluZWYS8kgnFUkUs7KHTTVsxkhDKQ7AvuTagpPEVNUbeU6WnNuGxzcuZIDJllISV3eKGIxMikZGfKaMb1IR1Dz9ExOMWBg+mMa7vsToheCVoEdtUaNSbidy+OXv/s1sW/NR2+ti9KH5bi41A9wOB3ws6Lx8//WGV1YqiVEPBQKamSJBQ1b++y1ie1rV4D2rrTmj10mtTiA7VpVWYSKcEaxlX7w07YdWSWRBDQSF1TeTRQVZSBQkhBItFjFLxOpjFUEoNVjwbC6O3pO/+4fOfXJtd+O9TDeUuvh612cgeaeL+rNReI1bXfWnT/8dpqNpY4VBkpE2Uc8DUZuISi5saEhawVajfxfe+yNzMX2zRclcS08iaZX75X1G05ZCAxpIbMoJEY0AABp0wqSo9EbESCxlo1WO+NeurZrLz5wvTiZ6aX/2Eor+9DU/S9UdrIgebzPQPsc1vb6T7ynz35qf90dTWvTKydVJarBRsFFSSOxGFMm4TNvKZkXlbugRAyN0YrbNJ3gX8iaESVVEgNDqJHAyZCYDYj1Bq9JEqiop7ZaLN+4+9Mt14pd1+vNz+vfrf9ndJcn/7ezW3kQJ3JvvstYwum207nkb9w7of/8yNHUptBwigyCmxMGXkQrMWad0ll9j7cfrDayB8qdXV+sa1CU4MqDlIhUSSSRI2zsiiiREswoQxUZX31d2bf/GvF1tf3vZf9QdFJ3YEGfUUMmPklX/NpRvSzt3/t5o2fXVt9UEOoxARIDSsdTMWwbmvNhq6ylwmamlLiuxwCbrF6W8qX0nZFChFRrOKFXFi0DEx58cW/62dF0r0vVHWYbtbXv1C/8yta3ZiHeED5wen6DtAAzY1UBrFoYwNFDDYHRVLEXtqh05XBIv2UqeKUhRSEsW+za4su0PZfLUmU9v+0yWDOctR9NkCRZgGRtiipooopQxy/+Jmw9bLp3aeK+onOruNHYG4TMeVBewDNAxnm4SgjOyMule7pTmfQcVwecq3i2DIupQrUzYos8FXbWMX5844gc91k+wv2mLnNfsX9Jtl7lJUYCQ3TwtCzxta7vtoK9e67J463i5D4wMtQbf88jYDEaONWtPdp/3yv23tgmdXIlZK3dshzFrpoZLtgGm7pZ747B8i+vm7+fYgtz64ph4wQBZp8oEhzTZ+QgG23lQq3Csrbizh9eH1ABFENfvI6xTtGwltX3p65B1cGHO3jMq4UlBNW+3QydkpGVVtWzseQe/O1W0ld5pKNpnNOTCv3kLnH3JrqRjyIapYk2O67y43bi5ly+Ho2SYiVq689sjS+GvjqFV1dkn6P1Q4jz2ZBJ2Wlw2LOtGZSU9S34r7OA/qtj2va+NOkisRSeVT3ERjANTvpvJRVHEVL58TtrBU4PDBOwNhsvTu40D/y+Ed+9L/64DMfHUfxRrZrxLYb5crIbsnUt81XP6WT3DIAkDkurHLhCCcXMcKomiv9lKhkjkFGatt07YRUcGAUAqHWVM3iwpnNV/8usbo9ydKHiIaC9pefePTpnzv7+L/1/HOfvDg0wbC6QCdnq2TkSRydFGvxyqhiVDEL7aUmnYTMYg29lD/7GBdWeWCFY31e3Wr9oDnLRnDQS+klJNL2wz5QVWjA1+Kinjt2+srF3/Xj1+B2ZMYdKhakZXF9u+o/cuLRrUJvTDE5VWSQcz7nzRE3piQJnZReSkcBysD2rO1+U4sq44p/+jq549qYaU3U9vSdw0gLU29OSQ09RwjMPMG3DbN6rk5iNRW7cIGrv9GSsN83HgBIqLfHFdsLn3yjGAx6Woo0aKWHTsagQxRGNZMaP5eDDTKcoY7tZiHg+oQrI3ZnFL5NDMyvQ88dvYROghOaqxKbKxFNxDU0iKjBWzN8tdz43O0pHDv0uyR190vHqs9f56evjOn12a0xKT4gjsUu3ZwVTxVB8JHdsjXDkaS9VLsMLSM6c4jcuuxt7zp0M6/tiRBJLP0eSYCa2lIpiYGFtd3br/55bwxg0qxfTd95ar34/c3uzijaXBTSHAulb0UDKx2yBGC54saEUUnuyBy5awm5dWDm53NHWrmAzPuvpgcOASISSZW+oUOLYy+nXJ9uHDTwdYcYQExy5PiHl08+7yVTdBakmhEtHVhbbPXAQCOYMYZ+Sj9lq+DmlJnfR1ify7sbnoRz2LlkY++VOoInRqrAbgWGBPqZuMju5su3bRl66PeIbcf1G3JuY9uWPmZdUUNtmNbcmHJssR285A6EOjD2iNBLSPotMyXso0c0m/8aPlZisHtgkRIiou1UJzQjfkvHaCjtpe0izDZ4/4Wgdj7j3ZFx7F3d1rQrPpIldFIKGM4IcGqZzJBaCs9u2a6tDLERbRMdMz+HP+cBp0FJjWClHQU3rW+DNRiljnQtDsqKnQmVN8Z1blsPMIf5+BvVsJ7cEKHwqGrQNtkC/Yyp581tdstWOz/I2ht8us2YbMrurN0Z10x93b7ZQLPpoOkDmA/LEkM3YbWLMWzPuFlI0IDNsrWP3rbaeXuIj79gjOsunQ+rn5hI1yWKkyioBUOeYg2jmsJTR3y8tcremvbEEUpPHW9tXZE5WK3zJUJ7m+astNfiTkpGM6oaq+SivjZZeqS68mtab9+G1wy4Qzt9EcSYtI7GzW5KvtLcqB0UE7GuPTgjlJ5rYzpJS4DoJvRS+ilVoBfpOEYVM9/6zS1Ibq5vbbpflCoQAt5T1VghcxBRkSzRqvNAsvRUmLxxGxZC7hBiWnv6IsYm/WAGNgai99HZiG0e2EjwlJHM0s8ZloxKxjW5Y1SRlyykdJO2/AdS2275aO8eAJrJgRJiy4ZrpjENg5qICGlCDGJEe5kpemdmt2Uedgf+7LciHrHWZtniI0nvgcqr+krUyRy2rEO7D6WX4oQ6tC1uUVEIQ+H6pN0r19Q8TdZN5gPL5uarvYWKKNJcU2aQ9ioPYiAomYNAqpTZyl1fhspc4iiKEcnSzqnu+o+nRz4xlQEaY8QpKD4000ucIzNsz9oDlXe3SnWkruat1rwbaHKA7Ck69qYF+q6hsbUE24JCuVMTkewo7wMPuPUnijgj2qu+mVdnQ++JNF1IMp0gRJqJpRG6Dh+Y1fMjno+9mnqlk2ClvU5gDmvcMkPUW5mgtYm2QGlUNMzN0PiBBde/PQ1wCHdJigjtf7PJ5dn2lxbrbz1yRI+dfPjy2DXry4xpLspjVFOGuUDMthB0c89MYuin7S65dL7EbM9L9hTFuje4b+6jlxaZkNh+xVp9beLwreLyP0DD7ZaH3UE//REVDBrruhrG2Akasp3XiPHStiOqRJLmHmeh9syqdgbppCXb1hEicT5ySSwJhDnqsJ+V1R76fCngnrBAFdFboakKogHbPWWSlVhevesbMYWg0QMx1j56MXmSLGzVa29tGa2VQPRYxUTKCu9BMZAZUkPpmdbEiKFFpGe+XSIEt0hze3Fkj9S+N7yM2nbFzYYiH7BCYpDOWds5dRtCcofRCTc2qKHBixdicnpjV5fNaNERa/AtY7CZWzX4gRViRCP9eUMgtGubpnW728bv2/ct+x559t24HSNxXpuGQIiEIKWP0S7Z3vn3iQEaG3iNZfSjWTnZnMp0dD0ML+VaSRBfEyp8TV1DQCKJYBRRegmpoZprvhrQvwzzu2XCXqk7b8H2VUGNGWIkxpanJfNGwXutA6b/xG2Yhw8VDY3oLM5e81vTpYXldXfm7PKxrw/Tt6ZYK2raBaui7ek3D/W0po6I2ZddaRGkBovWd9egZt9UoAk+zTct+UrRSIyYqK57DknR6rbChQ6dlqKxKidvTq78X7PMu/Xk/oWPvTFEfO1LUdNuMNZmybEhBGKkk6BNHxDbCnUvwoR9LBXZW2ewrwwNARNbi2pEYsxERaKILarxbQhFvEcbvWazna1rXy62vn7h6OCme2yrtJWaKCKixmjicFYaZtXeeGD/Ijn2WrD5NrNGOimtO8xroYhoG9ZcjDZSVdYEMyttsbshr/+Xfvr67ba5Sd7bX6TAw+eeXX/gT05Wnn8re/amO0mCOFYWEKtecI5aKRpiGzTbm3SOPSi3FGF79HT2hgERCagnVqI1sUS2Xjs++WJ+43PXL/3Tnd0rtyEU8V66pBhjYrxFw19eWnvwkY8d/6F//2rvmSthUJpEDVF02syKzXxf9D51RlTZ84Y434jceErbeQXwrJvx+s3fHH/rs2++/E+m0919f+xt1wn/f6RVxVSIVI1ZAAAAAElFTkSuQmCC';
 const forgeSec = document.querySelector('.forge'), forgeCv = document.getElementById('forge');
 const fStages = [...document.querySelectorAll('.f-stage')], fSteps = [...document.querySelectorAll('.f-steps li')];
@@ -407,7 +411,7 @@ function initForge(map) {
   outer.add(inner); sc.add(outer);
 
   const U = {
-    uRise: { value: reduceForge ? 1.3 : 0 }, uMorph: { value: 0 }, uKit: { value: 0 }, uBarY: { value: 1.48 }, uShockT: { value: 0 }, uTime: { value: 0 },
+    uRise: { value: reduceForge ? 1.3 : 0 }, uFade: { value: 0 }, uKit: { value: 0 }, uBarC: { value: new THREE.Vector2(0, 0) }, uShockT: { value: 0 }, uTime: { value: 0 },
     uHalf: { value: new THREE.Vector2(1, 1) }, uMaxH: { value: 1 }, uR: { value: 1 },
     uPts: { value: Array.from({ length: 10 }, () => new THREE.Vector3(0, 0, 0)) },
     uKitO: { value: new THREE.Vector2(0, 0) }, uKitU: { value: 1 }
@@ -417,23 +421,15 @@ function initForge(map) {
     Object.assign(sh.uniforms, U);
     sh.vertexShader = `
 attribute vec2 aXY; attribute vec4 aA;
-uniform float uRise, uMorph, uKit, uBarY, uShockT, uTime, uMaxH, uR, uKitU; uniform vec2 uHalf, uKitO; uniform vec3 uPts[10];
+uniform float uRise, uFade, uKit, uShockT, uTime, uMaxH, uR, uKitU; uniform vec2 uHalf, uKitO, uBarC; uniform vec3 uPts[10];
 float box(vec2 q, vec2 c, vec2 hs){ vec2 d = abs(q - c) - hs; return step(max(d.x, d.y), 0.0); }
 varying float vGray; varying float vGlow;
-float bounceOut(float t){ const float n=7.5625, d=2.75;
-  if(t<1.0/d) return n*t*t;
-  if(t<2.0/d){ t-=1.5/d; return n*t*t+0.75; }
-  if(t<2.5/d){ t-=2.25/d; return n*t*t+0.9375; }
-  t-=2.625/d; return n*t*t+0.984375; }
 ` + sh.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
   vec2 xy = aXY; float rnd = aA.w;
   vec2 nn = xy / uHalf * 0.5 + 0.5;
   float scan = uRise * 1.25 - 0.12;
   float rise = smoothstep(0.0, 0.14, scan - nn.y - rnd * 0.03);
-  float m = smoothstep(0.0, 1.0, clamp(uMorph * 1.8 - nn.x * 0.8 - rnd * 0.1, 0.0, 1.0));
-  float h = mix(aA.x * rise, aA.z, m);
-  float g = mix(aA.y, 0.94 * aA.z, m);
-  // squat rack + loaded barbell, front view, in metres (origin: floor centre)
+  // squat rack (origin: floor centre) and loaded barbell (origin: bar centre), front view, in metres
   vec2 q = (xy - uKitO) / uKitU;
   float rack = 0.0;
   for (int s = -1; s <= 1; s += 2) { float fs = float(s);
@@ -443,19 +439,22 @@ float bounceOut(float t){ const float n=7.5625, d=2.75;
   }
   rack = max(rack, box(q, vec2(0.0, 2.265), vec2(0.64, 0.035)));
   rack = max(rack, box(q, vec2(0.0, 0.03), vec2(0.85, 0.03)));
-  float by = uBarY, plates = 0.0, steel = box(q, vec2(0.0, by), vec2(1.1, 0.028));
+  vec2 qb = (xy - uBarC) / uKitU;
+  float plates = 0.0, steel = box(qb, vec2(0.0), vec2(1.1, 0.028));
   for (int s = -1; s <= 1; s += 2) { float fs = float(s);
-    steel = max(steel, box(q, vec2(0.66 * fs, by), vec2(0.012, 0.045)));
-    plates = max(plates, box(q, vec2(0.70 * fs, by), vec2(0.028, 0.225)));
-    plates = max(plates, box(q, vec2(0.765 * fs, by), vec2(0.028, 0.225)));
-    plates = max(plates, box(q, vec2(0.83 * fs, by), vec2(0.026, 0.19)));
-    steel = max(steel, box(q, vec2(0.875 * fs, by), vec2(0.012, 0.05)));
+    steel = max(steel, box(qb, vec2(0.66 * fs, 0.0), vec2(0.012, 0.045)));
+    plates = max(plates, box(qb, vec2(0.70 * fs, 0.0), vec2(0.028, 0.225)));
+    plates = max(plates, box(qb, vec2(0.765 * fs, 0.0), vec2(0.028, 0.225)));
+    plates = max(plates, box(qb, vec2(0.83 * fs, 0.0), vec2(0.026, 0.19)));
+    steel = max(steel, box(qb, vec2(0.875 * fs, 0.0), vec2(0.012, 0.05)));
   }
-  float bar = max(steel, plates);
-  float kitH = max(bar * 0.95, rack * 0.55);
-  float kitG = mix(0.78, 0.97, bar) * step(0.01, kitH);
   float mk = smoothstep(0.0, 1.0, clamp(uKit * 1.8 - nn.y * 0.8 - rnd * 0.1, 0.0, 1.0));
-  h = mix(h, kitH, mk); g = mix(g, kitG, mk);
+  float hp = aA.x * rise * (1.0 - smoothstep(0.0, 1.0, clamp(uFade * 1.6 - (1.0 - nn.y) * 0.4 - rnd * 0.2, 0.0, 1.0)));
+  float hb = max(steel, plates) * 1.05 * rise, hr = rack * 0.55 * mk;
+  float h = max(hp, max(hb, hr));
+  float isB = step(0.001, hb) * step(hp, hb) * step(hr, hb);
+  float isR = (1.0 - isB) * step(0.001, hr) * step(hp, hr);
+  float g = mix(mix(aA.y, 0.78, isR), 0.97, isB);
   h += 0.022 * sin(uTime * 1.3 + xy.x * 0.9 + xy.y * 0.6);
   float press = 0.0;
   for (int i = 0; i < 10; i++) { vec3 p = uPts[i]; press = max(press, p.z * (1.0 - smoothstep(0.0, uR, length(xy - p.xy)))); }
@@ -465,15 +464,16 @@ float bounceOut(float t){ const float n=7.5625, d=2.75;
   float lit = smoothstep(0.0, 0.04, max(h, 0.0));
   vGray = mix(0.09 + 0.05 * rnd, 0.1 + 0.9 * pow(g, 1.05), lit);
   float scanGlow = (1.0 - smoothstep(0.0, 0.035, abs(nn.y - scan))) * (1.0 - step(1.0, uRise));
-  float d = length(xy - uKitO - vec2(0.0, 0.2 * uKitU));
+  float d = length(xy - vec2(uBarC.x, uKitO.y));
   float ring = exp(-pow((d - uShockT * uHalf.x * 2.2) / (uHalf.x * 0.07), 2.0)) * step(0.001, uShockT) * (1.0 - uShockT);
-  vGlow = max(max(scanGlow, press * 0.85), max(ring, plates * mk * 0.3));`);
+  vGlow = max(max(scanGlow, press * 0.85), max(ring, plates * isB * 0.3));`);
     sh.fragmentShader = 'varying float vGray; varying float vGlow;\n' + sh.fragmentShader
       .replace('#include <color_fragment>', '#include <color_fragment>\n  diffuseColor.rgb *= vGray;')
       .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\n  totalEmissiveRadiance += vec3(1.0, 0.11, 0.05) * vGlow * 1.8;');
   };
 
-  let mesh = null, geo = null, V = { w: 16, h: 9 }, pivot = new THREE.Vector2(), cell = 0.1, textReady = false;
+  let mesh = null, geo = null, V = { w: 16, h: 9 }, pivot = new THREE.Vector2(), cell = 0.1;
+  const B = { holdX: 0, holdY: 0, floorY: 0, rackY: 0, kitX: 0 }; // bar key positions (world)
 
   function sampleMap(u, v) {
     if (u < 0 || v < 0 || u >= 1 || v >= 1) return [0, 0];
@@ -481,23 +481,6 @@ float bounceOut(float t){ const float n=7.5625, d=2.75;
     const px = (i, j, c) => map.d[((Math.min(j, map.h - 1)) * map.w + Math.min(i, map.w - 1)) * 4 + c] / 255;
     const bl = c => (px(x0, y0, c) * (1 - fx) + px(x0 + 1, y0, c) * fx) * (1 - fy) + (px(x0, y0 + 1, c) * (1 - fx) + px(x0 + 1, y0 + 1, c) * fx) * fy;
     return [bl(1), bl(0)];
-  }
-
-  function textMap(mobile) {
-    const CW = 900, CH = Math.round(CW * V.h / V.w), c = document.createElement('canvas');
-    c.width = CW; c.height = CH; const x = c.getContext('2d');
-    x.fillStyle = '#000'; x.fillRect(0, 0, CW, CH); x.fillStyle = '#fff'; x.textAlign = 'center'; x.textBaseline = 'middle';
-    const lines = mobile ? ['BUILT', 'NOT', 'BORN.'] : ['BUILT', 'NOT BORN.'];
-    let fs = CH / (lines.length * 1.02) * (mobile ? 0.62 : 0.78);
-    x.font = `${fs}px Anton, Impact, "Arial Narrow", sans-serif`;
-    const widest = Math.max(...lines.map(l => x.measureText(l).width));
-    if (widest > CW * 0.86) { fs *= CW * 0.86 / widest; x.font = `${fs}px Anton, Impact, "Arial Narrow", sans-serif`; }
-    const lh = fs * 0.98, y0 = CH / 2 - lh * (lines.length - 1) / 2 - (mobile ? CH * 0.08 : CH * 0.04);
-    x.shadowColor = '#fff'; x.shadowBlur = fs * 0.04;
-    lines.forEach((l, i) => x.fillText(l, CW / 2, y0 + i * lh));
-    const d = x.getImageData(0, 0, CW, CH).data;
-    return (wx, wy) => { const px = Math.round((wx / V.w + 0.5) * CW), py = Math.round((0.5 - wy / V.h) * CH);
-      if (px < 0 || py < 0 || px >= CW || py >= CH) return 0; return d[(py * CW + px) * 4] / 255; };
   }
 
   function build() {
@@ -516,11 +499,12 @@ float bounceOut(float t){ const float n=7.5625, d=2.75;
     const S = mobile ? Math.min(V.w * 1.08, V.h * 0.62) : V.h * 0.98;
     pivot.set(mobile ? 0 : V.w * 0.2, mobile ? V.h / 2 - S / 2 - V.h * 0.07 : -V.h / 2 + S / 2 - V.h * 0.03);
     U.uHalf.value.set(V.w / 2, V.h / 2); U.uMaxH.value = V.w * (mobile ? 0.07 : 0.055); U.uR.value = cell * (mobile ? 9 : 7);
-    // rack: floor above the closing caption, top below the nav; 2.3 m tall, 2.2 m bar
-    const floorY = -V.h * (mobile ? 0.2 : 0.17), topY = V.h * 0.4;
-    U.uKitU.value = Math.min((topY - floorY) / 2.35, V.w * 0.9 / 2.2);
-    U.uKitO.value.set(0, floorY);
-    const txt = textReady ? textMap(mobile) : () => 0;
+    // one scale (world units per metre) for bar and rack: rack 2.3 m tall between floor and nav, bar 2.2 m
+    const floorY = -V.h * (mobile ? 0.04 : 0.44), topY = V.h * (mobile ? 0.41 : 0.42);
+    const u = Math.min((topY - floorY) / 2.35, V.w * 0.9 / 2.2);
+    U.uKitU.value = u; U.uKitO.value.set(pivot.x, floorY);
+    B.kitX = pivot.x; B.holdX = pivot.x + (mobile ? 0 : 0.08 * S); B.holdY = pivot.y - 0.15 * S;
+    B.floorY = floorY + 0.225 * u; B.rackY = floorY + 1.48 * u;
     const n = cols * rows, aXY = new Float32Array(n * 2), aA = new Float32Array(n * 4);
     if (mesh) { inner.remove(mesh); mesh.dispose(); geo.dispose(); }
     const rr = cell / Math.sqrt(3) * 0.94;
@@ -534,14 +518,12 @@ float bounceOut(float t){ const float n=7.5625, d=2.75;
       m4.makeTranslation(x, y, 0); mesh.setMatrixAt(i, m4);
       const [hp, gp] = sampleMap((x - pivot.x) / S + 0.5, 0.5 - (y - pivot.y) / S);
       aXY[i * 2] = x; aXY[i * 2 + 1] = y;
-      aA[i * 4] = hp; aA[i * 4 + 1] = gp; aA[i * 4 + 2] = txt(x, y) * 0.8; aA[i * 4 + 3] = Math.random();
+      aA[i * 4] = hp; aA[i * 4 + 1] = gp; aA[i * 4 + 2] = 0; aA[i * 4 + 3] = Math.random();
     }
     inner.add(mesh);
     inner.position.set(-pivot.x, -pivot.y, 0); outer.position.set(pivot.x, pivot.y, 0);
   }
   build();
-  const fontReady = Promise.race([document.fonts.load('200px Anton'), new Promise(r => setTimeout(r, 2000))]);
-  fontReady.then(() => { textReady = true; build(); });
   let lastW = innerWidth, rt;
   addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => {
     if (Math.abs(innerWidth - lastW) > 40 || innerWidth >= 760) { lastW = innerWidth; build(); }
@@ -567,19 +549,22 @@ float bounceOut(float t){ const float n=7.5625, d=2.75;
     const dt = Math.min(clock.getDelta(), 0.05);
     if (!visible) return;
     const t = clock.elapsedTime; U.uTime.value = reduceForge ? 0 : t;
-    if (textReady && t0 === null) t0 = t;
+    if (t0 === null) t0 = t;
     if (!reduceForge && t0 !== null) U.uRise.value = Math.min(1.3, (t - t0) / 2.4);
     const p = reduceForge ? 0 : forgeP;
-    const a = easeIO(clampF(p / 0.2)), c = easeIO(clampF((p - 0.5) / 0.3));
-    U.uMorph.value = clampF((p - 0.2) / 0.24);
-    U.uKit.value = clampF((p - 0.5) / 0.16);
-    // the bar leaves the J-hooks and drops to the floor (deadlift position), bouncing; shockwave on impact
-    const bd = clampF((p - 0.7) / 0.14);
-    U.uBarY.value = 1.48 - (1.48 - 0.225) * bounceOutJS(bd);
+    const a = easeIO(clampF(p / 0.18)), c = easeIO(clampF((p - 0.5) / 0.3));
+    // 1) he lets the bar go: it drops to the floor and bounces, shockwave on impact; he sinks into the steel
+    const bd = clampF((p - 0.2) / 0.2);
     U.uShockT.value = clampF((bd - 1 / 2.75) / 0.5);
+    U.uFade.value = clampF((p - 0.26) / 0.18);
+    // 2) the pins build the rack; the bar slides to its centre, 3) then it is lifted onto the J-hooks
+    U.uKit.value = clampF((p - 0.5) / 0.18);
+    const slide = easeIO(U.uKit.value), lift = easeIO(clampF((p - 0.7) / 0.14));
+    U.uBarC.value.set(B.holdX + (B.kitX - B.holdX) * slide,
+      B.holdY + (B.floorY - B.holdY) * bounceOutJS(bd) + (B.rackY - B.floorY) * lift);
     pmx += (tpx - pmx) * 0.05; pmy += (tpy - pmy) * 0.05;
     const mob = innerWidth < 760;
-    outer.rotation.y = (mob ? -0.22 : -0.38) * (1 - a) + 0.12 * U.uMorph.value * (1 - c) + pmx * 0.12 + (reduceForge ? 0 : Math.sin(t * 0.25) * 0.03);
+    outer.rotation.y = (mob ? -0.22 : -0.38) * (1 - a) + pmx * 0.12 + (reduceForge ? 0 : Math.sin(t * 0.25) * 0.03);
     outer.rotation.x = 0.16 * (1 - a) + 0.06 * c - pmy * 0.08;
 
     // pointer imprint (ring buffer that cools down)
@@ -592,9 +577,9 @@ float bounceOut(float t){ const float n=7.5625, d=2.75;
     U.uPts.value.forEach(v => { v.z *= Math.exp(-dt * 1.6); });
 
     // overlay stages
-    const oa = 1 - clampF((p - 0.08) / 0.1), ob = clampF((p - 0.3) / 0.06) * (1 - clampF((p - 0.48) / 0.05)), oc = clampF((p - 0.74) / 0.08);
+    const oa = 1 - clampF((p - 0.08) / 0.1), ob = clampF((p - 0.22) / 0.06) * (1 - clampF((p - 0.46) / 0.05)), oc = clampF((p - 0.76) / 0.08);
     [oa, ob, oc].forEach((o, i) => { const s = fStages[i]; s.style.opacity = o; s.style.transform = `translateY(${(1 - o) * 30}px)`; s.style.visibility = o < 0.01 ? 'hidden' : 'visible'; });
-    const st = p < 0.22 ? 0 : p < 0.55 ? 1 : 2; fSteps.forEach((li, i) => li.classList.toggle('on', i === st));
+    const st = p < 0.2 ? 0 : p < 0.5 ? 1 : 2; fSteps.forEach((li, i) => li.classList.toggle('on', i === st));
     if (fHint) fHint.style.opacity = 1 - clampF(p / 0.06);
     r.render(sc, cam);
   }
