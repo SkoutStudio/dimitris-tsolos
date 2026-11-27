@@ -522,12 +522,13 @@ varying float vGray; varying float vGlow;
     geo.setAttribute('aA', new THREE.InstancedBufferAttribute(aA, 4));
     geo.setAttribute('aUV', new THREE.InstancedBufferAttribute(aUV, 2));
     mesh = new THREE.InstancedMesh(geo, mat, n); mesh.frustumCulled = false;
+    const athDy = mobile ? -0.1 : 0;
     const m4 = new THREE.Matrix4(); let i = 0;
     for (let j = 0; j < rows; j++) for (let k = 0; k < cols; k++, i++) {
       const x = (k + k0 + (j % 2 ? 0.5 : 0)) * cell, y = (j + j0) * rowH;
       m4.makeTranslation(x, y, 0); mesh.setMatrixAt(i, m4);
       const pu = (x - pivot.x) / S + 0.5, pv = 0.5 - (y - pivot.y) / S, [hp, gp] = sampleMap(pu, pv);
-      aUV[i * 2] = pu; aUV[i * 2 + 1] = pv;
+      aUV[i * 2] = pu; aUV[i * 2 + 1] = pv + athDy; // athlete is full-body: on mobile sit him lower, clear of the nav
       aXY[i * 2] = x; aXY[i * 2 + 1] = y;
       aA[i * 4] = hp; aA[i * 4 + 1] = gp; aA[i * 4 + 2] = 0; aA[i * 4 + 3] = Math.random();
     }
